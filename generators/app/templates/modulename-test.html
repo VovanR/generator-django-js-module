@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title><%= moduleName %></title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="../../../../../bower_components/vendor/mocha/mocha.css" media="screen">
+
+<style>
+</style>
+    </head>
+    <body>
+        <div id="mocha">
+            <p><a href=".">Index</a></p>
+        </div>
+
+        <div id="messages"></div>
+
+        <div id="fixtures"></div>
+
+        <div id="fixture-template" style="display: none;">
+        </div>
+
+        <script src="../../../../../bower_components/vendor/mocha/mocha.js"></script>
+        <script src="../../../../../bower_components/vendor/requirejs/require.js"></script>
+        <script src="../../../../../bower_components/vendor/jquery/dist/jquery.js"></script>
+        <script>
+        requirejs.config.baseUrl = '../../../../../static/js/';
+        requirejs(['../../../../../static/js/common-test'], function (common) {
+            requirejs(['../test/<%= fileName %>-test.js']);
+        });
+        </script>
+    </body>
+</html>
