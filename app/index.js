@@ -1,4 +1,4 @@
-var yeoman = require('yeoman-generator');
+var generators = require('yeoman-generator');
 var _ = require('lodash');
 
 var dest;
@@ -9,9 +9,9 @@ var appName;
 var authorName;
 var authorEmail;
 
-module.exports = yeoman.generators.Base.extend({
+module.exports = generators.Base.extend({
     constructor: function () {
-        yeoman.generators.Base.apply(this, arguments);
+        generators.Base.apply(this, arguments);
 
         this.option('filename', {
             type: String,
