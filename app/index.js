@@ -1,3 +1,4 @@
+var path = require('path');
 var generators = require('yeoman-generator');
 var _ = require('lodash');
 
@@ -10,54 +11,93 @@ var authorName;
 var authorEmail;
 
 module.exports = generators.Base.extend({
+    /**
+     */
     constructor: function () {
         generators.Base.apply(this, arguments);
+    },
 
-        this.option('filename', {
-            type: String,
-            required: true
-        });
-        fileName = this.options['filename'];
-        moduleName = _.capitalize(_.camelCase(fileName));
+    /**
+     */
+    askFor: function askFor () {
+        var done = this.async();
+        var config = this.config;
 
-        this.option('description', {
-            type: String,
-            required: true
-        });
-        description = this.options['description'];
+        var prompts = [
+            {
+                when: function () {
+                    return _.isUndefined(config.get('django-project'));
+                },
+                type: 'input',
+                name: 'django-project',
+                message: 'Django project name',
+            },
+            {
+                when: function () {
+                    return _.isUndefined(config.get('author-name'));
+                },
+                type: 'input',
+                name: 'author-name',
+                message: 'Author name',
+            },
+            {
+                when: function () {
+                    return _.isUndefined(config.get('author-email'));
+                },
+                type: 'input',
+                name: 'author-email',
+                message: 'Author email',
+            },
+            {
+                type: 'input',
+                name: 'appname',
+                message: 'Django app name',
+                store: true,
+            },
+            {
+                type: 'input',
+                name: 'filename',
+                message: 'Module name',
+            },
+            {
+                type: 'input',
+                name: 'description',
+                message: 'Description',
+            },
+        ];
 
-        this.option('appname', {
-            type: String,
-            required: true
-        });
-        appName = this.options['appname'];
+        this.prompt(
+            prompts,
+            function (props) {
+                djangoProject = props['django-project'] || config.get('django-project');
+                authorName = props['author-name'] || config.get('author-name');
+                authorEmail = props['author-email'] || config.get('author-email');
 
-        this.option('author-name', {
-            type: String,
-            required: true
-        });
-        authorName = this.options['author-name'];
+                config.set('django-project', djangoProject);
+                config.set('author-name', authorName);
+                config.set('author-email', authorEmail);
 
-        this.option('author-email', {
-            type: String,
-            required: true
-        });
-        authorEmail = this.options['author-email'];
+                fileName = props['filename'];
+                moduleName = _.capitalize(_.camelCase(fileName));
 
-        this.option('django-project', {
-            type: String,
-            required: true
-        });
-        var djangoProject = this.options['django-project'];
+                description = props['description'];
+                appName = props['appname'];
 
-        dest = djangoProject + '/apps/' + appName + '/static/' + appName + '/';
+                dest = path.join(djangoProject, 'apps', appName, 'static', appName);
+
+                done();
+            }
+        );
     },
 
     writing: {
+        /**
+         */
         testHTML: function () {
+            var filePath = path.join(dest, 'test', fileName + '-test.html');
             this.fs.copyTpl(
                 this.templatePath('modulename-test.html'),
-                this.destinationPath(dest + 'test/' + fileName + '-test.html'),
+                this.destinationPath(filePath),
                 {
                     fileName: fileName,
                     moduleName: moduleName,
@@ -65,10 +105,13 @@ module.exports = generators.Base.extend({
             );
         },
 
+        /**
+         */
         testJS: function () {
+            var filePath = path.join(dest, 'test', fileName + '-test.js');
             this.fs.copyTpl(
                 this.templatePath('modulename-test.js'),
-                this.destinationPath(dest + 'test/' + fileName + '-test.js'),
+                this.destinationPath(filePath),
                 {
                     fileName: fileName,
                     moduleName: moduleName,
@@ -77,10 +120,13 @@ module.exports = generators.Base.extend({
             );
         },
 
+        /**
+         */
         moduleJS: function () {
+            var filePath = path.join(dest, 'js', 'modules', fileName + '.js');
             this.fs.copyTpl(
                 this.templatePath('modulename.js'),
-                this.destinationPath(dest + 'js/modules/' + fileName + '.js'),
+                this.destinationPath(filePath),
                 {
                     moduleName: moduleName,
                     description: description,

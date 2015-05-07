@@ -1,6 +1,6 @@
-/**
+/**<% if (description) { %>
  * <%= description %>
- *
+ *<% } %>
  * @module <%= moduleName %>
  * @author <%= authorName %> <<%= authorEmail %>>
  */

@@ -10,25 +10,46 @@ npm i -g generator-django-js-module
 ```
 
 ## Usage
-Add `.yo-rc.json` to root of your django project
+Run in Django project root
 ```sh
-yo django-js-module --django-project=foo --author-name='Vladimir Rodkin' --author-email=mail@vovanr.com --filename=bar-baz --appname=quz --description='Super Bar!'
+yo django-js-module
+```
+In first time it creates `.yo-rc.json` and fills default settings
+Add `.yo-rc.json` to your `.gitignore`
+Next runs generator ask you only `Django app name`, `Module name` and `Description`. And you can run generator from any Django project folders.
+
+*Example*
+```sh
+$ yo django-js-module
+? Django project name: mysite
+? Author name: Vladimir Rodkin
+? Author email: mail@vovanr.com
+? Django app name: auth
+? Module name: auth-dialog
+? Description:
+   create mysite/apps/auth/static/auth/test/auth-dialog-test.html
+   create mysite/apps/auth/static/auth/test/auth-dialog-test.js
+   create mysite/apps/auth/static/auth/js/modules/auth-dialog.js
 ```
 ```sh
 $ tree
 .
-└── foo
+└── mysite
     └── apps
-        └── quz
+        └── auth
             └── static
-                └── quz
+                └── auth
                     ├── js
                     │   └── modules
-                    │       └── bar-baz.js
+                    │       └── auth-dialog.js
                     └── test
-                        ├── bar-baz-test.html
-                        └── bar-baz-test.js
+                        ├── auth-dialog-test.html
+                        └── auth-dialog-test.js
 ```
+
+## ToDo
+- [ ] Write about Django project structure
+- [ ] Write about running JS tests
 
 ## License
 MIT
