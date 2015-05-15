@@ -42,6 +42,9 @@ define([
 
         afterEach(function () {
         });
+        
+        describe('constructor', function () {
+        });
 
         describe('_init', function () {
         });
