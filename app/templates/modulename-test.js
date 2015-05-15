@@ -22,13 +22,14 @@ define([
          */
         var module = function (o) {
             var $fixtures = $('#fixtures');
-            o = _.extend(
-                o
+
+            o = _.defaults(
+                o || {},
+                {
+                }
             );
 
-            var m = new <%= moduleName %>(o);
-
-            return m;
+            return new <%= moduleName %>(o);
         };
 
         var _bFixtureTemplate = $('#fixture-template');
