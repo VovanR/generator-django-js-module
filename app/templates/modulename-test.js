@@ -42,7 +42,7 @@ define([
 
         afterEach(function () {
         });
-        
+
         describe('constructor', function () {
         });
 
