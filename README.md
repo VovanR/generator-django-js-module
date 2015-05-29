@@ -20,7 +20,7 @@ Next runs generator ask you only `Django app name`, `Module name` and `Descripti
 
 *Example*
 ```sh
-$ yo django-js-module
+yo django-js-module
 ? Django project name: mysite
 ? Author name: Vladimir Rodkin
 ? Author email: mail@vovanr.com
@@ -32,7 +32,7 @@ $ yo django-js-module
    create mysite/apps/auth/static/auth/js/modules/auth-dialog.js
 ```
 ```sh
-$ tree
+tree
 .
 └── mysite
     └── apps
@@ -52,7 +52,7 @@ $ tree
 - [ ] Write about running JS tests
 
 ## License
-MIT
+MIT © [Vladimir Rodkin](https://github.com/VovanR)
 
 
 [npm-url]: https://npmjs.org/package/generator-django-js-module
