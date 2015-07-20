@@ -1,7 +1,7 @@
 {
   "name": "generator-django-js-module",
   "description": "Django JS AMD module with tests",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "author": "Vladimir Rodkin <mail@vovanr.com>",
   "keywords": [
     "yeoman-generator"
