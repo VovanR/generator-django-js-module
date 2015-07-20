@@ -47,6 +47,29 @@ tree
                         └── auth-dialog-test.js
 ```
 
+*Example*
+```sh
+yo django-js-module
+? Django app name:
+? Module name: dialog
+? Description:
+   create mysite/static/test/dialog-test.html
+   create mysite/static/test/dialog-test.js
+   create mysite/static/js/modules/dialog.js
+```
+```sh
+tree
+.
+└── mysite
+    └── static
+        ├── js
+        │   └── modules
+        │       └── dialog.js
+        └── test
+            ├── dialog-test.html
+            └── dialog-test.js
+```
+
 ## ToDo
 - [ ] Write about Django project structure
 - [ ] Write about running JS tests
