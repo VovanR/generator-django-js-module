@@ -7,6 +7,7 @@ var fileName;
 var moduleName;
 var description;
 var appName;
+var isInApp;
 var authorName;
 var authorEmail;
 
@@ -52,7 +53,6 @@ module.exports = generators.Base.extend({
                 type: 'input',
                 name: 'appname',
                 message: 'Django app name',
-                store: true,
             },
             {
                 type: 'input',
@@ -82,8 +82,13 @@ module.exports = generators.Base.extend({
 
                 description = props['description'];
                 appName = props['appname'];
+                isInApp = (appName !== '');
 
-                dest = path.join(djangoProject, 'apps', appName, 'static', appName);
+                if (isInApp) {
+                    dest = path.join(djangoProject, 'apps', appName, 'static', appName);
+                } else {
+                    dest = path.join(djangoProject, 'static');
+                }
 
                 done();
             }
@@ -101,6 +106,7 @@ module.exports = generators.Base.extend({
                 {
                     fileName: fileName,
                     moduleName: moduleName,
+                    isInApp: isInApp,
                 }
             );
         },
@@ -116,6 +122,7 @@ module.exports = generators.Base.extend({
                     fileName: fileName,
                     moduleName: moduleName,
                     appName: appName,
+                    isInApp: isInApp,
                 }
             );
         },

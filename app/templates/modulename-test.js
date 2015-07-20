@@ -2,8 +2,9 @@ define([
     'jquery',
     'chai',
     'sinon',
-    'underscore',
-    '<%= appName %>/modules/<%= fileName %>',
+    'underscore',<% if (isInApp) { %>
+    '<%= appName %>/modules/<%= fileName %>',<% } else { %>
+    '../js/modules/<%= fileName %>',<% } %>
 ], function (
     $,
     chai,
